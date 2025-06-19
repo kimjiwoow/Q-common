@@ -737,5 +737,18 @@
             });
         });
     </script>
+    <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.location.hash === "#shop") {
+      const shopEl = document.getElementById("shop");
+      if (shopEl) {
+        setTimeout(() => {
+          shopEl.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  });
+</script>
+
 </body>
 </html>
