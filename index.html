@@ -26,6 +26,10 @@
             position: relative;
         }
         
+        .header-logo {
+            height: 24px; /* 원래 크기로 복원 */
+        }
+        
         .visitor-counter {
             background-color: rgba(192, 200, 208, 0.7);
             color: #fff;
@@ -60,7 +64,6 @@
             text-shadow: 0 0 0 4px #FF0000;
         }
 
-        /* 스크롤 시 고정되는 장바구니 아이콘 */
         .cart-icon-fixed {
             background-color: #39FF14;
             color: #000;
@@ -178,22 +181,21 @@
             text-align: center;
             min-height: 100vh;
             position: relative;
-            overflow: hidden; /* 별들이 섹션 밖으로 나가지 않도록 */
+            overflow: hidden;
         }
 
-        /* 스크롤 오버레이 */
         .scroll-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 200px; /* 높이를 줄여서 위쪽만 덮도록 */
+            height: 200px;
             background: linear-gradient(to bottom, 
                 rgba(57, 255, 20, 0.08) 0%,
                 rgba(57, 255, 20, 0.04) 50%,
                 rgba(57, 255, 20, 0) 100%);
-            backdrop-filter: blur(0.5px); /* 블러 효과 더 줄임 */
-            -webkit-backdrop-filter: blur(0.5px); /* Safari 지원 */
+            backdrop-filter: blur(0.5px);
+            -webkit-backdrop-filter: blur(0.5px);
             pointer-events: none;
             z-index: 10;
             opacity: 0;
@@ -207,97 +209,14 @@
         .main-logo {
             display: block;
             margin: 60px auto 0 auto;
-            position: relative;
+            position: absolute;
+            right: 50px; /* 오른쪽에 위치 */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px; /* 크기 증가 */
             z-index: 2;
         }
-        
-        /* 별 배경 컨테이너 - 360도 노트북 기준 최적화 */
-        .star-background {
-            position: absolute;
-            top: 52%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 675px;
-            z-index: 1;
-            pointer-events: none;
-            margin-top: 10px;
-        }
-        
-        .star-img {
-            position: absolute;
-            width: 52px;
-            height: 52px;
-            opacity: 0;
-            animation: starFormation 4s ease-out forwards;
-        }
 
-        @keyframes starFormation {
-            0% {
-                opacity: 1;
-                transform: translate(
-                    calc(var(--random-x, 0) * 400px - 200px), 
-                    calc(var(--random-y, 0) * 400px - 200px)
-                ) rotate(720deg) scale(0.2);
-            }
-            30% {
-                opacity: 1;
-                transform: translate(
-                    calc(var(--random-x, 0) * 200px - 100px), 
-                    calc(var(--random-y, 0) * 200px - 100px)
-                ) rotate(360deg) scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: translate(0, 0) rotate(0deg) scale(1);
-            }
-        }
-        
-        /* 각 별마다 다른 시작 위치와 딜레이 */
-        .star-img:nth-child(1) { --random-x: 0.1; --random-y: 0.8; animation-delay: 0.1s; }
-        .star-img:nth-child(2) { --random-x: 0.9; --random-y: 0.2; animation-delay: 0.2s; }
-        .star-img:nth-child(3) { --random-x: 0.3; --random-y: 0.9; animation-delay: 0.3s; }
-        .star-img:nth-child(4) { --random-x: 0.7; --random-y: 0.1; animation-delay: 0.4s; }
-        .star-img:nth-child(5) { --random-x: 0.2; --random-y: 0.4; animation-delay: 0.5s; }
-        .star-img:nth-child(6) { --random-x: 0.8; --random-y: 0.7; animation-delay: 0.6s; }
-        .star-img:nth-child(7) { --random-x: 0.4; --random-y: 0.3; animation-delay: 0.7s; }
-        .star-img:nth-child(8) { --random-x: 0.6; --random-y: 0.6; animation-delay: 0.8s; }
-        .star-img:nth-child(9) { --random-x: 0.1; --random-y: 0.5; animation-delay: 0.9s; }
-        .star-img:nth-child(10) { --random-x: 0.9; --random-y: 0.8; animation-delay: 1.0s; }
-        .star-img:nth-child(11) { --random-x: 0.5; --random-y: 0.1; animation-delay: 1.1s; }
-        .star-img:nth-child(12) { --random-x: 0.3; --random-y: 0.7; animation-delay: 1.2s; }
-        .star-img:nth-child(13) { --random-x: 0.7; --random-y: 0.4; animation-delay: 1.3s; }
-        .star-img:nth-child(14) { --random-x: 0.2; --random-y: 0.9; animation-delay: 1.4s; }
-        .star-img:nth-child(15) { --random-x: 0.8; --random-y: 0.3; animation-delay: 1.5s; }
-        .star-img:nth-child(16) { --random-x: 0.4; --random-y: 0.8; animation-delay: 1.6s; }
-        .star-img:nth-child(17) { --random-x: 0.6; --random-y: 0.2; animation-delay: 1.7s; }
-        .star-img:nth-child(18) { --random-x: 0.1; --random-y: 0.6; animation-delay: 1.8s; }
-        
-        /* Q 모양 별 이미지 배치 (18개) - 75% 비율 기준으로 재조정 */
-        .star-img:nth-child(1) { top: 90px; left: 187px; } /* 상단 왼쪽 */
-        .star-img:nth-child(2) { top: 67px; left: 243px; } /* 상단 중앙 왼쪽 */
-        .star-img:nth-child(3) { top: 67px; left: 318px; } /* 상단 중앙 오른쪽 */
-        .star-img:nth-child(4) { top: 90px; left: 375px; } /* 상단 오른쪽 */
-        
-        .star-img:nth-child(5) { top: 138px; left: 142px; } /* 왼쪽 상단 */
-        .star-img:nth-child(6) { top: 195px; left: 120px; } /* 왼쪽 중상 */
-        .star-img:nth-child(7) { top: 251px; left: 120px; } /* 왼쪽 중하 */
-        .star-img:nth-child(8) { top: 307px; left: 142px; } /* 왼쪽 하단 */
-        
-        .star-img:nth-child(9) { top: 138px; left: 420px; } /* 오른쪽 상단 */
-        .star-img:nth-child(10) { top: 195px; left: 442px; } /* 오른쪽 중상 */
-        .star-img:nth-child(11) { top: 251px; left: 442px; } /* 오른쪽 중하 */
-        
-        .star-img:nth-child(12) { top: 360px; left: 187px; } /* 하단 왼쪽 */
-        .star-img:nth-child(13) { top: 382px; left: 243px; } /* 하단 중앙 왼쪽 */
-        .star-img:nth-child(14) { top: 382px; left: 318px; } /* 하단 중앙 오른쪽 */
-        
-        /* Q의 꼬리 부분 */
-        .star-img:nth-child(15) { top: 307px; left: 337px; } /* 꼬리 왼쪽 */
-        .star-img:nth-child(16) { top: 352px; left: 375px; } /* 꼬리 중앙 */
-        .star-img:nth-child(17) { top: 382px; left: 427px; } /* 꼬리 오른쪽 */
-        .star-img:nth-child(18) { top: 307px; left: 420px; } /* 원형 연결부 */
-        
         .logo {
             font-size: 5rem;
             font-weight: bold;
@@ -306,15 +225,11 @@
             display: inline-block;
             margin: 40px 0;
         }
-
-        .stars {
-            display: none;
-        }
         
-        /* Middle Black Section */
+        /* Middle Section - 노란색으로 변경 */
         .middle-section {
-            background-color: #000;
-            color: #fff;
+            background-color: #FFFF00; /* 검정에서 노란색으로 변경 */
+            color: #000; /* 흰색에서 검정색으로 변경 */
             padding: 300px 20px;
             text-align: center;
             min-height: 150vh;
@@ -328,77 +243,71 @@
             margin-bottom: 100px;
         }
         
-     .quote-icon {
-    width: 130px;
-    height: 130px;
-
-    background: url('https://i.imgur.com/Te8xXqU.png') center center / contain no-repeat;
-    border-radius: 0%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0rem;
-    color: transparent;
-}
+        .quote-icon {
+            width: 130px;
+            height: 130px;
+            background: url('https://i.imgur.com/Te8xXqU.png') center center / contain no-repeat;
+            border-radius: 0%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0rem;
+            color: transparent;
+        }
 
         .quote-text {
             font-size: 4.5rem;
             font-weight: bold;
+            color: #000; /* 검정색으로 변경 */
         }
-/* 회전 애니메이션 정의 */
 
+        .code-section {
+            background-color: #000; /* 검정 배경 유지 */
+            color: #fff; /* 흰색 텍스트 */
+            padding: 60px;
+            border-radius: 15px;
+            margin: 60px auto;
+            max-width: 900px;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.2rem;
+            text-align: center;
+            padding-bottom: 160px;
+            line-height: 1.4;
+        }
 
-/* .code-section 스타일 */
-.code-section {
-    background-color: #111;
-    padding: 60px;
-    border-radius: 15px;
-    margin: 60px auto;
-    max-width: 900px;
-    font-family: 'Arial', sans-serif; /* 수정됨 */
-    font-size: 1.2rem; /* 수정됨 */
-    text-align: center; /* 추가됨: 텍스트 중앙 정렬 */
-    padding-bottom: 160px;  /* 👈 아래 여백 확보 */
-    line-height: 1.4;
-}
+        @keyframes rotateBox {
+            0% {
+                transform: rotate(-15deg);
+            }
+            100% {
+                transform: rotate(350deg);
+            }
+        }
+        
+        .brand-box {
+            transform: rotate(-15deg);
+            background-color: #00ff00;
+            color: white;
+            font-weight: bold;
+            padding: 24px 48px;
+            border-radius: 0;
+            font-size: 2rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100px;
+            animation: rotateBox 4s forwards;
+            animation-iteration-count: 2;
+        }
 
-@keyframes rotateBox {
-    0% {
-        transform: rotate(-15deg); /* 초기 회전 상태 */
-    }
-    100% {
-        transform: rotate(350deg); /* 360도 회전 후 오른쪽으로 기울어짐 (상단에서 오른쪽) */
-    }
-}
-.brand-box {
-    transform: rotate(-15deg);
-    background-color: #00ff00;
-    color: white;
-    font-weight: bold;
-    padding: 24px 48px;
-    border-radius: 0;
-    font-size: 2rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 280px;
-    height: 100px;
-    animation: rotateBox 4s forwards;
-    animation-iteration-count: 2; /* ✅ 2번만 실행 */
-}
-
-
-
-
-/* code-highlight 스타일 */
-.code-highlight {
-    background-color: #00ff00;
-    color: #000;
-    padding: 4px 12px;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
+        .code-highlight {
+            background-color: #00ff00;
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
 
         /* Bottom White Section (Shop) */
         .shop-section {
@@ -455,6 +364,7 @@
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background-color: #FFFF00;
+            border: 0.2px solid #000; /* 스트로크 추가 */
             padding: 35px 100px;
             border-radius: 80px;
             max-width: 1000px;
@@ -497,29 +407,34 @@
 
         .popup-buttons {
             display: flex;
-            gap: 20px;
+            gap: 80px; /* 60px에서 80px로 증가 */
             justify-content: center;
         }
 
         .btn {
-            padding: 12px 30px;
-            border-radius: 30px;
+            padding: 8px 35px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
             font-size: 1rem;
+            width: 140px; /* 더 긴 "동의안함" 텍스트에 맞춰서 크기 증가 */
+            text-align: center;
+            box-sizing: border-box;
         }
 
         .btn-primary {
-            background-color: #333;
-            color: #FFFF00;
+            background-color: #00ff15; /* 초록색으로 복원 */
+            color: #000; /* 검정 텍스트 유지 */
+            border: 0.2px solid #000; /* 검정 스트로크 유지 */
         }
 
         .btn-secondary {
-            background-color: #ccc;
-            color: #333;
+            background-color: #fff; /* 흰색 배경 */
+            color: #000; /* 검정 텍스트 */
+            border: 0.2px solid #000; /* 검정 스트로크 */
         }
 
         .btn:hover {
@@ -527,13 +442,28 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        /* Footer Yellow Section */
+        /* Footer Yellow Section - 추가 텍스트 */
         .footer {
             background-color: #FFFF00;
             padding: 80px 20px;
             text-align: center;
             color: #333;
             font-size: 1.1rem;
+        }
+
+        .footer-content {
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .footer-address {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-info {
+            font-size: 0.8rem;
+            opacity: 0.8;
         }
 
         /* Responsive */
@@ -559,66 +489,25 @@
                 flex-direction: column;
                 align-items: center;
             }
-
-            /* 모바일에서 별 크기 조정 */
-            .star-background {
-                width: 300px;
-                height: 400px;
-            }
-
-            .star-img {
-                width: 30px;
-                height: 30px;
-            }
-
-            /* 모바일에서 별 위치 재조정 */
-            .star-img:nth-child(1) { top: 60px; left: 100px; }
-            .star-img:nth-child(2) { top: 45px; left: 140px; }
-            .star-img:nth-child(3) { top: 45px; left: 180px; }
-            .star-img:nth-child(4) { top: 60px; left: 220px; }
-            
-            .star-img:nth-child(5) { top: 90px; left: 80px; }
-            .star-img:nth-child(6) { top: 120px; left: 70px; }
-            .star-img:nth-child(7) { top: 150px; left: 70px; }
-            .star-img:nth-child(8) { top: 180px; left: 80px; }
-            
-            .star-img:nth-child(9) { top: 90px; left: 240px; }
-            .star-img:nth-child(10) { top: 120px; left: 250px; }
-            .star-img:nth-child(11) { top: 150px; left: 250px; }
-            
-            .star-img:nth-child(12) { top: 210px; left: 100px; }
-            .star-img:nth-child(13) { top: 225px; left: 140px; }
-            .star-img:nth-child(14) { top: 225px; left: 180px; }
-            
-            .star-img:nth-child(15) { top: 180px; left: 190px; }
-            .star-img:nth-child(16) { top: 210px; left: 220px; }
-            .star-img:nth-child(17) { top: 225px; left: 250px; }
-            .star-img:nth-child(18) { top: 180px; left: 240px; }
         }
     </style>
 </head>
 <body>
-    <!-- Scroll Overlay -->
     <div class="scroll-overlay" id="scrollOverlay"></div>
 
-    <!-- Scroll Popup -->
     <div class="scroll-popup" id="scrollPopup">
         <button class="scroll-popup-close" onclick="closeScrollPopup()">&times;</button>
         <p class="popup-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam 
-            nonumy nibh euismod tincidunt ut laoreet dolore magna aliquam erat 
-            volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation 
-            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+            이 사이트는 사용자 경험을 개선하기 위해 쿠키를 사용합니다. 쿠키사용에 동의하시려면 '동의' 버튼을 클릭하세요. 자세한 내용은 개인정보처리 방침을 참고하세요.
         </p>
         <div class="popup-buttons">
-            <button class="btn btn-primary" onclick="closeScrollPopup()">Learn more</button>
-            <button class="btn btn-secondary" onclick="closeScrollPopup()">Agree & Close</button>
+            <button class="btn btn-secondary" onclick="closeScrollPopup()">동의안함</button>
+            <button class="btn btn-primary" onclick="closeScrollPopup()">동의</button>
         </div>
     </div>
 
-    <!-- Header -->
     <header class="header">
-        <img src="https://i.imgur.com/jhltZZJ.png" alt="Header Logo" class="header-logo">
+        <img src="https://i.imgur.com/WHtXUVm.png" alt="Header Logo" class="header-logo">
         <div class="visitor-counter" id="visitorCounter">
             <span class="flower-icon">★</span>
             <span id="visitorNumber">0</span>
@@ -628,139 +517,91 @@
         </div>
     </header>
 
-    <!-- 스크롤 시 고정되는 장바구니 아이콘 -->
     <div class="cart-icon-fixed" id="cartIconFixed" onclick="goToCart()">
         📦
     </div>
 
-    <!-- Main White Section -->
     <section class="main-section">
         <nav class="nav-menu">
             <a href="#home">토론장</a>
             <a href="#about">개인페이지</a>
-            <a href="#services">회원가입</a>
-            <a href="#contact">로그인</a>
+            <a href="#services">로그인</a>
+            <a onclick="scrollToShop(event)">Q굿즈샵</a>
         </nav>
         
-        <!-- 별 배경 (Q 모양) - 메인 섹션 내에서만 표시 -->
-        <div class="star-background">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
-            <img src="https://i.imgur.com/5bCJYFn.png" alt="Star" class="star-img">
+        <img src="https://i.imgur.com/WHtXUVm.png" alt="Main Logo" class="main-logo" id="mainLogoImg">
+    </section>
+
+    <section class="middle-section" style="padding: 60px 40px;">
+        <!-- 이미지로 대체 - 크기 축소 -->
+        <div style="text-align: center; margin: 80px auto 100px auto; max-width: 800px;">
+            <img src="https://i.imgur.com/zZOTRge.png" alt="브랜드 소개" style="width: 100%; height: auto; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
         </div>
         
-        <img src="https://i.imgur.com/83E9FbW.png" alt="Main Logo" class="main-logo" id="mainLogoImg">
-    </section>
-
-    <!-- Middle Black Section -->
-    <section class="middle-section">
-        <div class="quote-section">
-            <div class="quote-icon"></div>
-            <h1 class="quote-text"> " Your  Q, Our Common."</h2>
+        <!-- 튜토리얼 보러가기 버튼 - CSS 스타일에 맞춰 조정 -->
+        <div style="text-align: center; margin-bottom: 120px;">
+            <button style="background-color: rgba(0, 255, 21, 0.73); color: #000; padding: 16px 40px; border-radius: 15px; border: 1px solid #000; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 36px; line-height: 132%; letter-spacing: -0.02em; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 15px;" 
+                    onmouseover="this.style.transform='translateY(-2px)'" 
+                    onmouseout="this.style.transform='translateY(0)'"
+                    onclick="alert('튜토리얼 페이지로 이동합니다!')">
+                튜토리얼 보러가기
+                <span style="font-size: 20px;">▶</span>
+            </button>
         </div>
-     <div class="code-section" style="position: relative;">
-  <div class="code-section" style="position: relative; min-height: 400px;">
-    <!-- 브랜드 소개 박스 -->
-    <div class="brand-box">
-
-        브랜드 소개
-    </div>
-
-    <!-- 중앙 텍스트 3줄 -->
-<div style="text-align: left; font-weight: bold; color: white; font-size: 2rem; margin-top: 100px;">
-    <div style="margin-bottom: 20px;">
-        <span style="color: yellow;">Q:Quest</span> 우리는 질문합니다
-    </div>
-    <div style="margin-bottom: 20px;">
-        <span style="color: yellow;">Curation</span> 공통된 질문은 우리의 교차된 지점이
-    </div>
-    <div>
-        <span style="color: yellow;">Common</span> 공동체적 감각으로 이어집니다.
-    </div>
-</div>
-
-    <!-- 아래 왼쪽 텍스트 (살짝 위로 올림) -->
-    <div style="position: absolute; text-align: left;  bottom: 60px; left: 40px; font-weight: bold; color: white; font-size: 1rem;">
-          큐레이션된 감정과 취향이 모여 토론시스템을 활성화하여 
-        대화하는  '우리만의 공간'을 만드는 플렛폼입니다.
-        질문문,추천,인용으로 시작된 취향기반의 공유공동체 큐,커먼 당신의 취향이 공통점이 되고 확장되는 공간입니다.
-        놀면서 지식도 쌓는 공간. 더 정확한 정보를 얻기위해서 이곳으로 오세요! 서울 강남구 00로 0길 강남역 2번출구에서 10분거리에 
-        큐레이션 소통형 도서관 큐커먼 오프라인이 오픈할 예정입니다.  
-    </div>
-
-    <!-- 아래 오른쪽 텍스트 (조금 아래로 유지) -->
-    <div style="position: absolute;  bottom: 5px; right: 50px; font-weight: bold; color: white; font-size: 1rem;">
-      
-        아래 상품도 구경하세요
-    </div>
-</div>
-
-   
     </section>
 
-    <!-- Bottom White Section (Shop) -->
-    <section class="shop-section">
+    <section class="shop-section" id="shop-section">
         <h2 class="shop-title">Q SHOP</h2>
         <div class="product-grid">
-            <div class="product-card">상품 이미지 영역</div>
-            <div class="product-card">상품 이미지 영역</div>
-            <div class="product-card">상품 이미지 영역</div>
+            <div class="product-card" id="product1">
+                <img src="https://i.imgur.com/NkyPEGy.png" alt="상품 이미지" style="width: 80%; height: auto; border-radius: 10px;">
+            </div>
+            <div class="product-card" id="product2">준비중</div>
+            <div class="product-card" id="product3">준비중</div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2025 Common. All rights reserved.</p>
+        <div class="footer-content">
+            <!-- 오른쪽 정렬 회사 정보 -->
+            <div style="text-align: right; font-size: 0.8rem; color: #AEA800; line-height: 1.4; margin-bottom: 20px;">
+                Company Q COMMON | Business Name FIVE SPACE CO.,LTD | Business License 000-01-00001<br>
+                Mail-order License No. 제 2021-서울성동-01588호 | CEO K<br>
+                OFFICE ADER 14, Yeonmujang 9-gil, Seongdong-gu, Seoul, Korea
+            </div>
+        </div>
+        
+        <!-- 왼쪽 하단 카피라이트 -->
+        <div style="text-align: left; font-size: 0.7rem; color: #AEA800; margin-top: 30px;">
+            ⓒ Q COMMON
+        </div>
     </footer>
 
     <script>
         let popupShown = false;
         
-        // 메모리 기반 방문자 카운터 (세션 동안 유지)
         let visitorData = {
             count: 0,
             lastUpdate: Date.now()
         };
 
         function updateVisitorCount() {
-            // 방문자 수 증가
             visitorData.count += 1;
             visitorData.lastUpdate = Date.now();
-
-            // 숫자만 업데이트
             document.getElementById('visitorNumber').textContent = visitorData.count.toLocaleString();
         }
 
-        // 페이지 로드 시 방문자 수 업데이트
         updateVisitorCount();
 
-        // 별 애니메이션 완료 후 팝업 자동 표시
         window.addEventListener('load', function () {
-            // 별 애니메이션이 완료되는 시점보다 조금 빨리 팝업 표시
             setTimeout(function() {
                 if (!popupShown) {
                     document.getElementById('scrollPopup').classList.add('show');
                     popupShown = true;
                 }
-            }, 4500); // 6초 → 4.5초로 단축
+            }, 4500);
         });
 
-        // 로고 애니메이션
         window.addEventListener('load', function () {
             const mainLogo = document.getElementById('mainLogoImg');
             if (mainLogo.complete) {
@@ -770,14 +611,18 @@
             }
 
             function startAnimation() {
-                mainLogo.style.width = '1300px';
+                mainLogo.style.width = '1667px'; /* 원본 코드 크기 */
                 mainLogo.style.display = 'block';
                 mainLogo.style.opacity = '1';
+                mainLogo.style.position = 'absolute';
+                mainLogo.style.right = '50px';
+                mainLogo.style.top = '50%';
+                mainLogo.style.transform = 'translateY(-50%)';
 
                 setTimeout(function () {
-                    let currentSize = 1300;
-                    const targetSize = 900;
-                    const step = 5;
+                    let currentSize = 1667;
+                    const targetSize = 1333; /* 원본 코드 최종 크기 */
+                    const step = 17;
                     const intervalTime = 25;
 
                     const shrinkInterval = setInterval(function () {
@@ -793,28 +638,23 @@
             }
         });
 
-        // 스크롤 오버레이 효과 및 장바구니 아이콘 고정
         window.addEventListener('scroll', function() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const overlay = document.getElementById('scrollOverlay');
             const cartIcon = document.getElementById('cartIcon');
             const cartIconFixed = document.getElementById('cartIconFixed');
             
-            // 스크롤이 100px 이상일 때 오버레이 활성화
             if (scrollTop > 100) {
                 overlay.classList.add('active');
-                // 헤더의 장바구니 숨기고 고정 장바구니 보이기
                 cartIcon.style.display = 'none';
                 cartIconFixed.style.display = 'flex';
             } else {
                 overlay.classList.remove('active');
-                // 헤더의 장바구니 보이고 고정 장바구니 숨기기
                 cartIcon.style.display = 'flex';
                 cartIconFixed.style.display = 'none';
             }
         });
 
-        // 스크롤 시 팝업 표시
         window.addEventListener('scroll', function () {
             if (!popupShown) {
                 const middleSection = document.querySelector('.middle-section');
@@ -826,25 +666,74 @@
             }
         });
 
-        // 장바구니 페이지로 이동
         function goToCart() {
-            // 여기에 장바구니 페이지 이동 로직 추가
-            alert('장바구니 페이지로 이동합니다!');
-            // window.location.href = '/cart'; // 실제 구현시 사용
+            // 첫 번째 상품과 같은 페이지로 이동
+            window.open('https://example.com', '_blank'); // 새 탭에서 열기
+            // 또는 같은 탭에서 열려면: window.location.href = 'https://example.com';
         }
 
-        // 팝업 닫기
+        function scrollToShop(event) {
+            event.preventDefault(); // 기본 링크 동작 방지
+            const shopSection = document.getElementById('shop-section');
+            shopSection.scrollIntoView({ 
+                behavior: 'smooth', // 부드러운 스크롤
+                block: 'start' // 섹션 상단으로 스크롤
+            });
+        }
+
         function closeScrollPopup() {
             document.getElementById('scrollPopup').classList.remove('show');
         }
 
-        // 상품 카드 호버
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('mouseenter', function () {
-                this.innerHTML = '<div style="color: #333; font-weight: bold;">상품 상세보기</div>';
-            });
-            card.addEventListener('mouseleave', function () {
-                this.innerHTML = '상품 이미지 영역';
+        // 상품 카드 호버 효과 업데이트
+        document.addEventListener('DOMContentLoaded', function() {
+            // 첫 번째 상품 카드 (이미지가 있는 카드)
+            const product1 = document.getElementById('product1');
+            if (product1) {
+                // 클릭 이벤트 추가
+                product1.addEventListener('click', function () {
+                    // 여기에 원하는 URL을 입력하세요
+                    window.open('https://example.com', '_blank'); // 새 탭에서 열기
+                    // 또는 같은 탭에서 열려면: window.location.href = 'https://example.com';
+                });
+
+                // 마우스 커서를 포인터로 변경
+                product1.style.cursor = 'pointer';
+
+                product1.addEventListener('mouseenter', function () {
+                    const img = this.querySelector('img');
+                    if (img) {
+                        img.style.transform = 'scale(1.05)';
+                        img.style.transition = 'transform 0.3s ease';
+                    }
+                    // 박스 전체에 호버 효과 추가
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
+                });
+                product1.addEventListener('mouseleave', function () {
+                    const img = this.querySelector('img');
+                    if (img) {
+                        img.style.transform = 'scale(1)';
+                    }
+                    // 박스 원래 상태로 복원
+                    this.style.transform = 'none';
+                    this.style.boxShadow = 'none';
+                });
+            }
+
+            // 나머지 상품 카드들 (준비중)
+            const product2 = document.getElementById('product2');
+            const product3 = document.getElementById('product3');
+            
+            [product2, product3].forEach(card => {
+                if (card) {
+                    card.addEventListener('mouseenter', function () {
+                        this.innerHTML = '<div style="color: #666; font-weight: bold; font-size: 1.1rem;">곧 출시 예정</div>';
+                    });
+                    card.addEventListener('mouseleave', function () {
+                        this.innerHTML = '준비중';
+                    });
+                }
             });
         });
     </script>
